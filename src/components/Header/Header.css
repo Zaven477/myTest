@@ -1,0 +1,49 @@
+.header {
+  width: 1440px;
+  height: 64px;
+  margin: 0 auto;
+  text-align: center;
+  color: white;
+  background: rgba(33, 150, 243, 1);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 2rem;
+}
+
+.header-tab {
+  width: 120px;
+  height: 64px;
+  background: transparent;
+  color: white;
+  border: none;
+  font-family: "Roboto";
+  font-size: 14px;
+  font-weight: 400;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin: 0;
+  margin-left: 24px;
+  white-space: nowrap;
+}
+
+.header-tab:first-child {
+  margin-left: 7px;
+}
+
+.header-tab:not(:first-child) {
+  margin-left: 0;
+  width: 140px;
+}
+
+.header-tab:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.header-tab.active {
+  background: rgba(30, 136, 229, 1);
+  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
