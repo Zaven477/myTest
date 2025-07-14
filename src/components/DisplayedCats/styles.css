@@ -4,7 +4,7 @@
   margin: 0;
   padding: 2rem 35px;
   position: relative;
-  min-height: calc(100vh - 64px); /* Вычитаем высоту header */
+  min-height: calc(100vh - 64px);
 }
 
 .cats-grid {
@@ -41,7 +41,7 @@
   opacity: 0;
   transition: opacity 0.3s ease;
   will-change: opacity;
-  transform: translateZ(0); /* Аппаратное ускорение */
+  transform: translateZ(0);
 }
 
 .cat-image-container {
@@ -128,6 +128,14 @@
   margin: 0 auto 1rem;
 }
 
+.error-message {
+  color: red;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -148,8 +156,6 @@
   transform: scale(1.15);
   filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.7));
 }
-
-/* --- Responsive styles --- */
 
 @media (max-width: 1200px) {
   .cats-grid {
@@ -201,6 +207,15 @@
   .favorite-btn svg {
     width: 20px;
     height: 20px;
+  }
+}
+
+@media (min-width: 431px) and (max-width: 600px) {
+  .main {
+    padding-right: 20px;
+  }
+  .cats-grid {
+    padding-right: 20px;
   }
 }
 
