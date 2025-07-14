@@ -1,0 +1,1 @@
+export const COUNT_IMAGES = 12;
