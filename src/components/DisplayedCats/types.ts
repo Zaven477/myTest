@@ -4,3 +4,10 @@ export interface Cat {
   width: number;
   height: number;
 }
+
+export interface DisplayedCatsProps {
+  activeTab: 'all' | 'favorites';
+  toggleFavorite: (arg: Cat) => void;
+  isFavorite: (id: string) => boolean;
+  favorites: Cat[];
+}
