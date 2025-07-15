@@ -12,7 +12,7 @@ export const DispayedCats = ({
   favorites,
   isFavorite,
 }: DisplayedCatsProps) => {
-  const { loading, hasMore, getImages, uniqCatsById, error } = useDisplayedCats();
+  const { loading, hasMore, getImages, cats, error } = useDisplayedCats();
   
   const [ref, inView] = useInView({
     threshold: 0,
@@ -25,7 +25,7 @@ export const DispayedCats = ({
     }
   }, [inView, hasMore, loading, getImages, activeTab]);
 
-  const tabData = { all: uniqCatsById, favorites: favorites };
+  const tabData = { all: cats, favorites: favorites };
 
   const displayedCats = tabData[activeTab];
 
