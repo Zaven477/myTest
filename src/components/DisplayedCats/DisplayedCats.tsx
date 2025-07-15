@@ -36,8 +36,8 @@ export const DispayedCats = ({
     );
   }
 
-  if(error) {
-    return <div className="error-message">{error}</div>
+  if (error) {
+    return <div className="error-message">{error}</div>;
   }
 
   return (
