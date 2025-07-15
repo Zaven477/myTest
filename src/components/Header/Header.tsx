@@ -1,18 +1,9 @@
-import { useState } from "react";
 import "./Header.css";
-import type { Cat, Tab } from "./types";
-import { useTabs } from "./hook";
+import type { HeaderProps } from "./types";
 
-export const Header = () => {
-  const [favorites] = useState<Cat[]>([]);
 
-  const tabs: Tab[] = [
-    { id: "all", label: "Все котики" },
-    { id: "favorites", label: `Любимые котики`, badge: favorites.length },
-  ];
 
-  const { activeTab, setTab } = useTabs(tabs.map((tab) => tab.id));
-
+export const Header = ({ tabs, activeTab, setTab }: HeaderProps) => {
   return (
     <header className="header">
       {tabs.map((tab) => (
