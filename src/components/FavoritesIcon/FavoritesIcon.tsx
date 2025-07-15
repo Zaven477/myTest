@@ -1,7 +1,7 @@
 import type { HeartIconProps } from "./types";
 
 
-export const HeartIcon = ({ isFilled, className = "" }: HeartIconProps) => {
+export const FavoritesIcon = ({ isFilled, className = "" }: HeartIconProps) => {
   if (isFilled) {
     return (
       <svg

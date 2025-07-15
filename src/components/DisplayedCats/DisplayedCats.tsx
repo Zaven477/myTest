@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import type { DisplayedCatsProps } from "./types";
 import { COUNT_IMAGES } from "../constants";
 import { useInView } from "react-intersection-observer";
-import { HeartIcon } from "../HeartIcon/HeartIcon";
+import { FavoritesIcon } from "../FavoritesIcon/FavoritesIcon";
 
 export const DispayedCats = ({
   activeTab,
@@ -76,7 +76,7 @@ export const DispayedCats = ({
                     isFavorite(cat.id) ? "favorited" : ""
                   }`}
                 >
-                  <HeartIcon isFilled={isFavorite(cat.id)} />
+                  <FavoritesIcon isFilled={isFavorite(cat.id)} />
                 </button>
               </div>
             </div>
