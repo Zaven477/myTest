@@ -4,6 +4,7 @@ import { Header } from "../Header/Header";
 import type { Tab, TabType } from "../Header/types";
 import "./style.css";
 import { useState } from "react";
+import { Tabs } from "./types";
 
 
 export const Layout = () => {
@@ -14,7 +15,7 @@ export const Layout = () => {
     { id: "favorites", label: "Любимые котики", badge: favorites.length },
   ];
   
-  const [activeTab, setActiveTab] = useState<TabType>(tabs[0].id);
+  const [activeTab, setActiveTab] = useState<TabType>(Tabs.All);
 
   return (
     <div className="app">
