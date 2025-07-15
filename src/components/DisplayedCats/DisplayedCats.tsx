@@ -13,7 +13,7 @@ export const DispayedCats = ({
   isFavorite,
 }: DisplayedCatsProps) => {
   const { loading, hasMore, getImages, cats, error } = useDisplayedCats();
-  
+
   const [ref, inView] = useInView({
     threshold: 0,
     triggerOnce: false,
@@ -43,9 +43,9 @@ export const DispayedCats = ({
 
   return (
     <div className="main">
-      <div className="cats-grid">
+      <ul className="cats-grid" role="list">
         {displayedCats.map((cat, index) => (
-          <div
+          <li
             key={cat.id}
             className="cat-card"
             ref={
@@ -53,24 +53,13 @@ export const DispayedCats = ({
                 ? ref
                 : null
             }
+            role="listitem"
           >
             <div
               className="cat-image-container"
               onClick={() => toggleFavorite(cat)}
             >
-              <img
-                src={cat.url}
-                alt="Котик"
-                loading="lazy"
-                onLoad={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.opacity = "1";
-                }}
-                onError={(e) => {
-                  const target = e.target as HTMLImageElement;
-                  target.style.display = "none";
-                }}
-              />
+              <img src={cat.url} alt="Котик" loading="lazy" />
               <button
                 className={`favorite-btn ${
                   isFavorite(cat.id) ? "favorited" : ""
@@ -79,9 +68,9 @@ export const DispayedCats = ({
                 <FavoritesIcon isFilled={isFavorite(cat.id)} />
               </button>
             </div>
-          </div>
+          </li>
         ))}
-      </div>
+      </ul>
     </div>
   );
 };
