@@ -24,8 +24,10 @@ export const useDisplayedCats = () => {
           setHasMore(false);
         }
         setCats((prevCats) => {
-          const exsistingIds = new Set(prevCats.map((cat) => cat.id))
-          const uniqueCats = response.filter((cat: Cat) => !exsistingIds.has(cat.id))
+          const exsistingIds = new Set(prevCats.map((cat) => cat.id));
+          const uniqueCats = response.filter(
+            (cat: Cat) => !exsistingIds.has(cat.id)
+          );
           return [...prevCats, ...uniqueCats];
         });
       } catch (err) {
