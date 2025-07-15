@@ -6,7 +6,6 @@ import "./style.css";
 import { useState } from "react";
 import { Tabs } from "./types";
 
-
 export const Layout = () => {
   const { favorites, toggleFavorite, isFavorite } = useFavoritesCats();
 
@@ -14,11 +13,11 @@ export const Layout = () => {
     { id: "all", label: "Все котики" },
     { id: "favorites", label: "Любимые котики", badge: favorites.length },
   ];
-  
+
   const [activeTab, setActiveTab] = useState<TabType>(Tabs.All);
 
   return (
-    <div className="app">
+    <main className="app">
       <Header tabs={tabs} activeTab={activeTab} setTab={setActiveTab} />
       <DispayedCats
         activeTab={activeTab}
@@ -26,6 +25,6 @@ export const Layout = () => {
         toggleFavorite={toggleFavorite}
         isFavorite={isFavorite}
       />
-    </div>
+    </main>
   );
 };
