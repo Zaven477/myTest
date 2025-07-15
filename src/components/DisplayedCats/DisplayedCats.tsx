@@ -12,7 +12,8 @@ export const DispayedCats = ({
   favorites,
   isFavorite,
 }: DisplayedCatsProps) => {
-  const { loading, hasMore, getImages, cats, error } = useDisplayedCats();
+  const { loading, hasMore, getImages, uniqCatsById, error } = useDisplayedCats();
+  
   const [ref, inView] = useInView({
     threshold: 0,
     triggerOnce: false,
@@ -24,7 +25,7 @@ export const DispayedCats = ({
     }
   }, [inView, hasMore, loading, getImages, activeTab]);
 
-  const tabData = { all: cats, favorites: favorites };
+  const tabData = { all: uniqCatsById, favorites: favorites };
 
   const displayedCats = tabData[activeTab];
 
@@ -41,48 +42,46 @@ export const DispayedCats = ({
   }
 
   return (
-    <main className="main">
-      <>
-        <div className="cats-grid">
-          {displayedCats.map((cat, index) => (
+    <div className="main">
+      <div className="cats-grid">
+        {displayedCats.map((cat, index) => (
+          <div
+            key={cat.id}
+            className="cat-card"
+            ref={
+              activeTab === "all" && index === displayedCats.length - 1
+                ? ref
+                : null
+            }
+          >
             <div
-              key={cat.id}
-              className="cat-card"
-              ref={
-                activeTab === "all" && index === displayedCats.length - 1
-                  ? ref
-                  : null
-              }
+              className="cat-image-container"
+              onClick={() => toggleFavorite(cat)}
             >
-              <div
-                className="cat-image-container"
-                onClick={() => toggleFavorite(cat)}
+              <img
+                src={cat.url}
+                alt="Котик"
+                loading="lazy"
+                onLoad={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.opacity = "1";
+                }}
+                onError={(e) => {
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
+                }}
+              />
+              <button
+                className={`favorite-btn ${
+                  isFavorite(cat.id) ? "favorited" : ""
+                }`}
               >
-                <img
-                  src={cat.url}
-                  alt="Котик"
-                  loading="lazy"
-                  onLoad={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.opacity = "1";
-                  }}
-                  onError={(e) => {
-                    const target = e.target as HTMLImageElement;
-                    target.style.display = "none";
-                  }}
-                />
-                <button
-                  className={`favorite-btn ${
-                    isFavorite(cat.id) ? "favorited" : ""
-                  }`}
-                >
-                  <FavoritesIcon isFilled={isFavorite(cat.id)} />
-                </button>
-              </div>
+                <FavoritesIcon isFilled={isFavorite(cat.id)} />
+              </button>
             </div>
-          ))}
-        </div>
-      </>
-    </main>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };

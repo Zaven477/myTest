@@ -9,6 +9,16 @@ export const useDisplayedCats = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
+  const set = new Set();
+  const uniqCatsById = cats.filter((cat) => {
+    if(set.has(cat.id)) {
+      return false;
+    }
+    set.add(cat.id)
+    return true;
+  })
+
+
   const getImages = useCallback(async (countImages: number) => {
     if (!hasMore) {
       return;
@@ -38,5 +48,5 @@ export const useDisplayedCats = () => {
   }, [getImages]);
   
 
-  return {cats, loading, error, hasMore, getImages}
+  return {uniqCatsById, loading, error, hasMore, getImages}
 };
