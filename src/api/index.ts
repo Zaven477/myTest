@@ -1,7 +1,12 @@
+import { API_KEY } from "../components/constants";
+
+const BASE_URL = 'https://api.thecatapi.com/v1'
+
+
 export const fetchCats = async (count: number) => {
-  const response = await fetch(`https://api.thecatapi.com/v1/images/search?limit=${count}`, {
+  const response = await fetch(`${BASE_URL}/images/search?limit=${count}`, {
     headers: {
-      'x-api-key': 'live_fHrUNHA96CMXDTbia9Xw4eSfJAovSZ0LWw5NPslMT79piyDM4IsdzPNJz5ktlzO3'
+      'x-api-key': API_KEY
     }
   });
   return response.json();
