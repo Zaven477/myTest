@@ -13,7 +13,7 @@ export const Header = ({ tabs, activeTab, setTab }: HeaderProps) => {
           onClick={() => setTab(tab.id)}
         >
           {tab.label}
-          {typeof tab.badge === "number" ? ` (${tab.badge})` : null}
+          {tab.badge ? `(${tab.badge})` : null}
         </button>
       ))}
     </header>
