@@ -13,6 +13,7 @@ export const Layout = () => {
     { id: "all", label: "Все котики" },
     { id: "favorites", label: "Любимые котики", badge: favorites.length },
   ];
+  
   const [activeTab, setActiveTab] = useState<TabType>(tabs[0].id);
 
   return (
