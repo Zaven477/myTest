@@ -7,7 +7,7 @@ import { useState } from "react";
 import { Tabs } from "./types";
 
 export const Layout = () => {
-  const { favorites, toggleFavorite, isFavorite } = useFavoritesCats();
+  const { favorites, addToFavorite, deleteFavorite,  isFavorite } = useFavoritesCats();
 
   const tabs: Tab[] = [
     { id: "all", label: "Все котики" },
@@ -22,7 +22,8 @@ export const Layout = () => {
       <Cats
         activeTab={activeTab}
         favorites={favorites}
-        toggleFavorite={toggleFavorite}
+        addFavorites={addToFavorite}
+        deleteFavorites={deleteFavorite}
         isFavorite={isFavorite}
       />
     </main>

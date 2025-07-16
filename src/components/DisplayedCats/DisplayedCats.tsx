@@ -7,7 +7,8 @@ import { ClipLoader } from "react-spinners";
 
 export const Cats = ({
   activeTab,
-  toggleFavorite,
+  addFavorites,
+  deleteFavorites,
   favorites,
   isFavorite,
 }: DisplayedCatsProps) => {
@@ -42,7 +43,7 @@ export const Cats = ({
           <li key={cat.id} className="cat-card">
             <div
               className="cat-image-container"
-              onClick={() => toggleFavorite(cat)}
+              onClick={isFavorite(cat.id) ? () => deleteFavorites(cat) : () => addFavorites(cat)}
             >
               <img src={cat.url} alt="Котик" loading="lazy" />
               <button

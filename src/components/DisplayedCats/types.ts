@@ -7,7 +7,8 @@ export interface Cat {
 
 export interface DisplayedCatsProps {
   activeTab: 'all' | 'favorites';
-  toggleFavorite: (arg: Cat) => void;
+  addFavorites: (arg: Cat) => void;
+  deleteFavorites: (arg: Cat) => void;
   isFavorite: (id: string) => boolean;
   favorites: Cat[];
 }

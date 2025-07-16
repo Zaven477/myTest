@@ -5,16 +5,15 @@ import { FAVORITES_STORAGE_KEY } from "../constants";
 export const useFavoritesCats = () => {
   const [favorites, setFavorites] = useState<Cat[]>([]);
 
-  const toggleFavorite = (cat: Cat) => {
+  const addToFavorite = (cat: Cat) => {
+    setFavorites((prevFavorites) => [...prevFavorites, cat]);
+  }
+
+  const deleteFavorite = (cat: Cat) => {
     setFavorites((prevFavorites) => {
-      const isFavorite = prevFavorites.some((fav) => fav.id === cat.id);
-      if (isFavorite) {
-        return prevFavorites.filter((fav) => fav.id !== cat.id);
-      } else {
-        return [...prevFavorites, cat];
-      }
-    });
-  };
+      return prevFavorites.filter((fav) => fav.id !== cat.id);
+    })
+  }
 
   const isFavorite = (catId: string) => {
     return favorites.some((fav) => fav.id === catId);
@@ -32,5 +31,5 @@ export const useFavoritesCats = () => {
     localStorage.setItem(FAVORITES_STORAGE_KEY, JSON.stringify(favorites));
   }, [favorites]);
 
-  return { favorites, toggleFavorite, isFavorite };
+  return { favorites, addToFavorite, deleteFavorite, isFavorite };
 };
