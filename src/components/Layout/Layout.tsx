@@ -1,4 +1,4 @@
-import { DispayedCats } from "../DisplayedCats/DisplayedCats";
+import { Cats } from "../DisplayedCats/DisplayedCats";
 import { useFavoritesCats } from "../DisplayedCats/useFavoritesCats";
 import { Header } from "../Header/Header";
 import type { Tab, TabType } from "../Header/types";
@@ -19,7 +19,7 @@ export const Layout = () => {
   return (
     <main className="app">
       <Header tabs={tabs} activeTab={activeTab} setTab={setActiveTab} />
-      <DispayedCats
+      <Cats
         activeTab={activeTab}
         favorites={favorites}
         toggleFavorite={toggleFavorite}

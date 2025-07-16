@@ -5,7 +5,7 @@ import { COUNT_IMAGES } from "../constants";
 import { FavoritesIcon } from "../FavoritesIcon/FavoritesIcon";
 import { ClipLoader } from "react-spinners";
 
-export const DispayedCats = ({
+export const Cats = ({
   activeTab,
   toggleFavorite,
   favorites,
@@ -37,9 +37,9 @@ export const DispayedCats = ({
 
   return (
     <div className="main">
-      <ul className="cats-grid" role="list">
+      <ul className="cats-grid">
         {displayedCats.map((cat) => (
-          <li key={cat.id} className="cat-card" role="listitem">
+          <li key={cat.id} className="cat-card">
             <div
               className="cat-image-container"
               onClick={() => toggleFavorite(cat)}
@@ -62,7 +62,7 @@ export const DispayedCats = ({
             className="btn-pagination"
             onClick={() => loadMoreCats(COUNT_IMAGES)}
           >
-            {loading ? "Загрузка..." : "загружаем еще котиков"}
+            {loading ? "Загрузка..." : "Загрузить еще котиков"}
           </button>
         </div>
       )}

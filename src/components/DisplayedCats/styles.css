@@ -144,7 +144,7 @@
   cursor: pointer;
 }
 
-/* --- Responsive Design --- */
+
 
 @media (max-width: 1024px) {
   .cats-grid {
