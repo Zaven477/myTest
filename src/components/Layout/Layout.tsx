@@ -1,5 +1,5 @@
-import { Cats } from "../DisplayedCats/DisplayedCats";
-import { useFavoritesCats } from "../DisplayedCats/useFavoritesCats";
+import { Cats } from "../Cats/Cats";
+import { useFavoritesCats } from "../Cats/useFavoritesCats";
 import { Header } from "../Header/Header";
 import type { Tab, TabType } from "../Header/types";
 import "./style.css";
@@ -11,7 +11,7 @@ export const Layout = () => {
 
   const tabs: Tab[] = [
     { id: "all", label: "Все котики" },
-    { id: "favorites", label: "Любимые котики", badge: favorites.length },
+    { id: "favoritesCats", label: "Любимые котики", badge: favorites.length },
   ];
 
   const [activeTab, setActiveTab] = useState<TabType>(Tabs.All);

@@ -1,4 +1,4 @@
-export type TabType =  'all' | 'favorites';
+export type TabType =  'all' | 'favoritesCats';
 
 export interface Tab {
   id: TabType;
