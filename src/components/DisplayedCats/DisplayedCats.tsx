@@ -1,10 +1,9 @@
 import { useDisplayedCats } from "./useDispayedCats";
 import "./styles.css";
-import { useEffect } from "react";
 import type { DisplayedCatsProps } from "./types";
 import { COUNT_IMAGES } from "../constants";
-import { useInView } from "react-intersection-observer";
 import { FavoritesIcon } from "../FavoritesIcon/FavoritesIcon";
+import { ClipLoader } from "react-spinners";
 
 export const DispayedCats = ({
   activeTab,
@@ -12,18 +11,7 @@ export const DispayedCats = ({
   favorites,
   isFavorite,
 }: DisplayedCatsProps) => {
-  const { loading, hasMore, getImages, cats, error } = useDisplayedCats();
-
-  const [ref, inView] = useInView({
-    threshold: 0,
-    triggerOnce: false,
-  });
-
-  useEffect(() => {
-    if (inView && hasMore && !loading && activeTab === "all") {
-      getImages(COUNT_IMAGES);
-    }
-  }, [inView, hasMore, loading, getImages, activeTab]);
+  const { loading, cats, error, loadMoreCats } = useDisplayedCats();
 
   const tabData = { all: cats, favorites: favorites };
 
@@ -32,7 +20,13 @@ export const DispayedCats = ({
   if (loading && displayedCats.length === 0) {
     return (
       <div className="loading-center">
-        <div className="spinner"></div>
+        <ClipLoader
+          color="#2196f3"
+          size={50}
+          cssOverride={{
+            borderWidth: "3px",
+          }}
+        />
       </div>
     );
   }
@@ -44,17 +38,8 @@ export const DispayedCats = ({
   return (
     <div className="main">
       <ul className="cats-grid" role="list">
-        {displayedCats.map((cat, index) => (
-          <li
-            key={cat.id}
-            className="cat-card"
-            ref={
-              activeTab === "all" && index === displayedCats.length - 1
-                ? ref
-                : null
-            }
-            role="listitem"
-          >
+        {displayedCats.map((cat) => (
+          <li key={cat.id} className="cat-card" role="listitem">
             <div
               className="cat-image-container"
               onClick={() => toggleFavorite(cat)}
@@ -71,6 +56,16 @@ export const DispayedCats = ({
           </li>
         ))}
       </ul>
+      {activeTab === "all" && displayedCats.length > 0 && (
+        <div className="btn-container">
+          <button
+            className="btn-pagination"
+            onClick={() => loadMoreCats(COUNT_IMAGES)}
+          >
+            {loading ? "Загрузка..." : "загружаем еще котиков"}
+          </button>
+        </div>
+      )}
     </div>
   );
 };

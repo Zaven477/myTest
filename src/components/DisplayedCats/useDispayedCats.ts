@@ -5,45 +5,41 @@ import { COUNT_IMAGES } from "../constants";
 
 export const useDisplayedCats = () => {
   const [cats, setCats] = useState<Cat[]>([]);
-  const [hasMore, setHasMore] = useState(true);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
-  const getImages = useCallback(
-    async (countImages: number) => {
-      if (!hasMore) {
-        return;
+  const getImages = useCallback(async (countImages: number) => {
+    setLoading(true);
+
+    try {
+      const response = await fetchCats(countImages);
+
+      setCats((prevCats) => {
+        const exsistingIds = new Set(prevCats.map((cat) => cat.id));
+        const uniqueCats = response.filter(
+          (cat: Cat) => !exsistingIds.has(cat.id)
+        );
+        return [...prevCats, ...uniqueCats];
+      });
+    } catch (err) {
+      if (err instanceof Error) {
+        setError(err.message);
       }
+    } finally {
+      setLoading(false);
+    }
+  }, [])
 
-      setLoading(true);
-
-      try {
-        const response = await fetchCats(countImages);
-
-        if (response.length < countImages) {
-          setHasMore(false);
-        }
-        setCats((prevCats) => {
-          const exsistingIds = new Set(prevCats.map((cat) => cat.id));
-          const uniqueCats = response.filter(
-            (cat: Cat) => !exsistingIds.has(cat.id)
-          );
-          return [...prevCats, ...uniqueCats];
-        });
-      } catch (err) {
-        if (err instanceof Error) {
-          setError(err.message);
-        }
-      } finally {
-        setLoading(false);
-      }
+  const loadMoreCats = useCallback(
+    (countCats: number) => {
+      getImages(countCats);
     },
-    [hasMore]
+    [getImages]
   );
 
   useEffect(() => {
     getImages(COUNT_IMAGES);
   }, [getImages]);
 
-  return { cats, loading, error, hasMore, getImages };
+  return { cats, loading, error, getImages, loadMoreCats };
 };
